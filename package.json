@@ -1,0 +1,17 @@
+{
+  "name": "d3-chart-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "bower install",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bower": "^1.7.2",
+    "express": "^4.13.3"
+  }
+}

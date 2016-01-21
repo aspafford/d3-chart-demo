@@ -5,26 +5,34 @@ angular.module('app.dataService', [])
   var getData = function() {
     return $http({
         method: 'GET',
-        url: 'data/data_test.csv'
+        url: '/data/data_test.csv'
       })
-      .then(function(resp) {
-        return CSVToArray(resp.data);
+      .then(function successCallback(response) {
+        return CSVToArray(response.data);
+      }, function errorCallback(response) {
+        console.log('error fetching .csv file', response)
       });
   };
 
   function CSVToArray(strData) {
 
-    var result = [];
+    var result, lines, keys;
 
-    var lines = strData.match(/[^\r\n]+/g);
+    result = [];
 
-    var keys = lines.shift();
-    // console.log(keys, 'keys');
+    lines = strData.match(/[^\r\n]+/g);
 
-    lines.forEach(function(l) {
-      var data = l.split(/,/);
-      result.push(data);
-    });
+    if (Array.isArray(lines)) {
+      keys = lines.shift();
+      // console.log(keys, 'keys');
+
+      lines.forEach(function(l) {
+        var data = l.split(/,/);
+        result.push(data);
+      });
+    } else {
+      console.log('CSV File is empty');
+    }
 
     return result;
   }

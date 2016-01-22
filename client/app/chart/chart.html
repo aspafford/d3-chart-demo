@@ -1,4 +1,13 @@
+<div ng-controller="ChartPickerCtrl as ctrl">
+  <md-input-container>
+    <label>Select Chart</label>
+      <md-select ng-model="userDate" ng-change="change(userDate)">
+        <md-option ng-repeat="(key, val) in ctrl.columns" value="{{ key }}" ng-selected="selected(key)">
+          {{ val }}
+        </md-option>
+      </md-select>
+    </md-input-container>
+  </div>
 <div id="chart-container" ng-controller="ChartCtrl">
-  <div>{{ title }}</div>
   <d3-line-chart data="data"></d3-line-chart>
 </div>

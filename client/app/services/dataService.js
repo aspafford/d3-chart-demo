@@ -2,6 +2,9 @@ angular.module('app.dataService', [])
 
 .factory('DataService', function($http) {
 
+  // load default chart selection
+  selectedChart = 1;
+
   var getData = function(id) {
     return $http({
         method: 'GET',
@@ -15,20 +18,19 @@ angular.module('app.dataService', [])
   };
 
   function CSVToArray(strData, id) {
-
-    var result, lines, keys;
-
-    result = [];
-
-    lines = strData.match(/[^\r\n]+/g);
+    var result = { values: [] };
+    // parse lines of csv file
+    var lines = strData.match(/[^\r\n]+/g);
 
     if (Array.isArray(lines)) {
-      keys = lines.shift();
-      // console.log(keys, 'keys');
-
+      // store first line of csv file as an array of column names
+      var columns = lines.shift();
+      result.columns = columns.split(/,/);
+      // store remaining lines as values array
       lines.forEach(function(l) {
         var data = l.split(/,/);
-        result.push([ data[0], data[id] ]);
+        // push date (x-axis) and selected column (y-axis)
+        result.values.push([ data[0], data[id] ]);
       });
     } else {
       console.log('CSV File is empty');
@@ -38,6 +40,7 @@ angular.module('app.dataService', [])
   }
 
   return {
-    getData: getData
+    getData: getData,
+    selectedChart: selectedChart
   };
 });

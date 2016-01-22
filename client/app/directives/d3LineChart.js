@@ -12,7 +12,7 @@
           d3Service.d3().then(function(d3) {
 
             $scope.$watch('data', function(data) {
-              if (data) init(data);
+              if (data) init(data.values);
             });
 
             function init(data) {

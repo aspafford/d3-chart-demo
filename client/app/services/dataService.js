@@ -8,7 +8,7 @@ angular.module('app.dataService', [])
   var getData = function(id) {
     return $http({
         method: 'GET',
-        url: '/data/data_test.csv'
+        url: '/data/data_source_15_2014_06.csv'
       })
       .then(function successCallback(response) {
         return CSVToArray(response.data, id);

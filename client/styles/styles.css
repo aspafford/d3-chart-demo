@@ -6,3 +6,26 @@
 .x-ng-cloak {
   display: none !important;
 }
+
+body {
+  font: 10px sans-serif;
+  background: #53535B;
+  color: white;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: white;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: #7BBFEA;
+  stroke-width: 1.5px;
+}

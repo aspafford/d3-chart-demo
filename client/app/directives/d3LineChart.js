@@ -25,8 +25,8 @@
                   bottom: 30,
                   left: 40
                 },
-                width = 800 - margin.left - margin.right,
-                height = 500 - margin.top - margin.bottom;
+                width = 900 - margin.left - margin.right,
+                height = 550 - margin.top - margin.bottom;
 
               var x = d3.time.scale()
                 .range([0, width]);
@@ -41,6 +41,15 @@
               var yAxis = d3.svg.axis()
                 .scale(y)
                 .orient("left");
+
+              var line = d3.svg.line()
+                .interpolate("basis")
+                .x(function(d) {
+                  return x(d.date)
+                })
+                .y(function(d) {
+                  return y(d.yValue)
+                });
 
               var svg = d3.select(element[0]).append('svg')
                 .attr("width", width + margin.left + margin.right)
@@ -62,7 +71,6 @@
               y.domain(d3.extent(data, function(d) {
                 return d.yValue;
               }));
-              // y.domain([0, d3.max(data, function(d) { return d.yValue; })]);
 
               svg.append("g")
                 .attr("class", "x axis")
@@ -73,24 +81,11 @@
                 .attr("class", "y axis")
                 .call(yAxis);
 
-              var bars = svg.selectAll(".bar")
-                .data(data)
-                .enter()
-                .append("rect")
-                .attr("class", "bar")
-                .attr("x", function(d) {
-                  return x(d.date);
-                })
-                .attr("width", (width / data.length - 1 + "px"))
-                .attr("y", function(d) {
-                  return y(d.yValue);
-                })
-                .attr("height", 0)
-                .transition()
-                .duration(1000)
-                .attr("height", function(d) {
-                  return height - y(d.yValue);
-                });
+              svg.append("path")
+                .datum(data)
+                .attr("class", "line")
+                .attr("d", line);
+
             }
           });
         }

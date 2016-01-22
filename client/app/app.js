@@ -13,8 +13,7 @@
   .config(function($routeProvider) {
     $routeProvider
       .when('/chart/:id', {
-        templateUrl: 'app/chart/chart.html',
-        controller: 'ChartCtrl'
+        templateUrl: 'app/chart/chart.html'
       })
       .otherwise({
         redirectTo: '/chart/1'

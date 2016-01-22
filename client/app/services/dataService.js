@@ -2,19 +2,19 @@ angular.module('app.dataService', [])
 
 .factory('DataService', function($http) {
 
-  var getData = function() {
+  var getData = function(id) {
     return $http({
         method: 'GET',
         url: '/data/data_test.csv'
       })
       .then(function successCallback(response) {
-        return CSVToArray(response.data);
+        return CSVToArray(response.data, id);
       }, function errorCallback(response) {
         console.log('error fetching .csv file', response)
       });
   };
 
-  function CSVToArray(strData) {
+  function CSVToArray(strData, id) {
 
     var result, lines, keys;
 
@@ -28,7 +28,7 @@ angular.module('app.dataService', [])
 
       lines.forEach(function(l) {
         var data = l.split(/,/);
-        result.push(data);
+        result.push([ data[0], data[id] ]);
       });
     } else {
       console.log('CSV File is empty');

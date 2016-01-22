@@ -2,12 +2,12 @@
 (function() {
   'use strict';
   angular.module('app.chart', ['ngMaterial'])
-    .controller('ChartCtrl', function($scope, DataService) {
+    .controller('ChartCtrl', function($scope, $routeParams, DataService) {
 
       $scope.title = "Chart 1";
 
       $scope.showChartData = function() {
-        DataService.getData()
+        DataService.getData($routeParams.id)
           .then(function(data) {
             $scope.data = data;
           })

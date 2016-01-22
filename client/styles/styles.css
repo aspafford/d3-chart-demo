@@ -8,15 +8,13 @@
 }
 
 body {
-  font: 10px sans-serif;
-  background: #53535B;
-  color: white;
+  font: 11px sans-serif;
 }
 
 .axis path,
 .axis line {
   fill: none;
-  stroke: white;
+  stroke: #000;
   shape-rendering: crispEdges;
 }
 
@@ -28,4 +26,12 @@ body {
   fill: none;
   stroke: #7BBFEA;
   stroke-width: 1.5px;
+}
+
+#chart-container {
+  padding-left: 20px;
+}
+
+.chart-picker {
+  padding: 10px 0 0 30px;
 }

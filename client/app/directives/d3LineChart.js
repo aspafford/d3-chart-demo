@@ -11,7 +11,7 @@
         link: function($scope, element, attr) {
           d3Service.d3().then(function(d3) {
 
-            $scope.$watch('data', function(data) {
+            $scope.$on('dataLoaded', function(event, data) {
               if (data) init(data.values);
             });
 
